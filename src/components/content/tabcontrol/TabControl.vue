@@ -36,10 +36,11 @@ export default {
   text-align: center;
   height:40px;
   line-height: 40px;
+  background-color: #fff;
 }
 .tab-control div{
   flex:1;
-  background-color: #fff;
+  
 }
 .tab-control span{
   padding:5px;

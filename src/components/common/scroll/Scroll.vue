@@ -16,6 +16,17 @@ BScroll.use(ObserveDOM);
 
 export default {
   components: {},
+  props:{
+    probeType:{
+      type: Number,
+      default:0
+    },
+    pullUpLoad:{
+      type: Boolean,
+      default:false
+    }
+
+  },
   data() {
     return {
       scroll: null
@@ -24,18 +35,30 @@ export default {
   methods: {
     scrollTo(x,y,time=300){
       this.scroll.scrollTo(x,y,time);
+    },
+    refresh(){
+      this.scroll.refresh();
     }
   },
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
-      probeType: 3,
-      pullUpLoad: true,
-      observeDOM: true,
+      probeType: this.probeType,
+      pullUpLoad: this.pullUpLoad,
+      //observeDOM: true,
       click: true
+    });
+
+    this.scroll.on('scroll',(position)=>{
+      this.$emit('scroll',position);
+    });
+
+    this.scroll.on('pullingUp',()=>{
+      this.$emit('pullingUp');
+      this.scroll.finishPullUp();
     });
   },
   updated() {
-    this.scroll.refresh();
+    //this.scroll.refresh();
   }
 };
 </script>
