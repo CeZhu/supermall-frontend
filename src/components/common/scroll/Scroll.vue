@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      scroll: null
+      scroll: null,
     };
   },
   methods: {
@@ -59,7 +59,12 @@ export default {
   },
   updated() {
     //this.scroll.refresh();
-  }
+  },
+  activated() {
+    // this.scroll.y = this.$store.state.scrollY;
+    // this.scroll.refresh();
+    // console.log(this.$store.state.scrollY);
+  },
 };
 </script>
 

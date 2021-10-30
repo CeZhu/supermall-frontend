@@ -1,7 +1,7 @@
 <template>
-  <div id="param-info">
+  <div id="param-info" v-if="Object.keys(goodsParam).length!==0">
     <div class="info">
-      <div v-for="item in goodsParam.sizes[0]" class="item-rule">
+      <div v-for="(item,index) in goodsParam.sizes[0]" class="item-rule" :key="index">
           <div v-for="n in item">{{n}}</div>
       </div>
     </div>
@@ -16,12 +16,12 @@
 export default {
   props:{
     goodsParam:{
-      type:{},
+      type:Object,
       default(){
         return {};
       }
     }
-  }
+  },
 };
 </script>
 
@@ -40,10 +40,7 @@ export default {
   flex:1;
   border-bottom: 1px solid #eee;
 }
-.info{
-  /* border-bottom: 3px solid #eee;
-  border-collapse: collapse; */
-}
+
 #item-info{
   display: flex;
   margin:10px 20px;

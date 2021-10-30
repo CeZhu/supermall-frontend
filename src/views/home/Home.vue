@@ -45,7 +45,7 @@ import GoodsList from "components/content/goods/GoodsList.vue";
 import BackTop from "components/content/backTop/BackTop.vue";
 
 import { getHomeMultiData, getHomeGoods } from "network/home.js";
-import {debounce} from "common/utils.js"
+import { debounce } from "common/utils.js";
 export default {
   components: {
     NavBar,
@@ -71,7 +71,7 @@ export default {
         sell: { page: 0, list: [] }
       },
       isShowBackTop: false,
-      isFixed:false,
+      isFixed: false,
       offsetTop: 50
     };
   },
@@ -81,11 +81,15 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
-  mounted(){
-    const refresh = debounce(this.$refs.scroll.refresh,50);
-    this.$bus.$on('goodsItemImageLoad',()=>{
+  mounted() {
+    const refresh = debounce(this.$refs.scroll.refresh, 50);
+    this.$bus.$on("goodsItemImageLoad", () => {
       refresh();
     });
+  },
+  activated() {
+    this.$refs.scroll.refresh();
+    this.$refs.scroll.scrollTo(0,this.$store.state.scrollY,0);
   },
   methods: {
     /* 事件相关方法 */
@@ -103,8 +107,8 @@ export default {
         default:
           break;
       }
-      this.$refs.tabControl1.currentIndex=index;
-      this.$refs.tabControl2.currentIndex=index;
+      this.$refs.tabControl1.currentIndex = index;
+      this.$refs.tabControl2.currentIndex = index;
     },
     back2Top() {
       //console.log("click");
@@ -163,7 +167,7 @@ export default {
   position: sticky;
   top: 44px;
 } */
-.tab-control2{
+.tab-control2 {
   position: relative;
   z-index: 9;
 }

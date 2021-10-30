@@ -1,6 +1,6 @@
 <template>
   <div class="GoodsListItem" @click="itemClick">
-    <img :src="goodsItem.show.img" @load="imageLoad" />
+    <img :src="getImage" @load="imageLoad" />
     <p>{{ goodsItem.title }}</p>
     <span class="price">{{ goodsItem.price }}</span>
     <span class="fav">{{ goodsItem.cfav }}</span>
@@ -17,11 +17,18 @@ export default {
       }
     }
   },
+  computed:{
+    getImage(){
+      return this.goodsItem.image || this.goodsItem.show.img;
+    }
+  },
   methods: {
     imageLoad() {
       this.$bus.$emit("goodsItemImageLoad");
     },
     itemClick(){
+      //console.log(this.$parent.$parent.scroll.y);
+      this.$store.commit('setScrollY',this.$parent.$parent.scroll.y);
       this.$router.push("/detail/"+this.goodsItem.iid);
     }
   }
